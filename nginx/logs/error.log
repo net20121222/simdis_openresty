@@ -1,16 +1,116 @@
-2015/10/27 23:07:00 [alert] 42036#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:07:04 [alert] 42037#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:07:42 [error] 42039#0: *1 failed to load external Lua file "/usr/local/openresty/nginx/lua/job_addtask.lua": cannot open /usr/local/openresty/nginx/lua/job_addtask.lua: No such file or directory, client: 127.0.0.1, server: localhost, request: "GET /rcsapi/job/addtask HTTP/1.1", host: "127.0.0.1"
-2015/10/27 23:08:33 [alert] 42063#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:08:33 [notice] 42063#0: signal process started
-2015/10/27 23:08:33 [alert] 42038#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:08:35 [error] 42064#0: *2 failed to load external Lua file "/usr/local/openresty/nginx/lua/job_addtask.lua": cannot open /usr/local/openresty/nginx/lua/job_addtask.lua: No such file or directory, client: 127.0.0.1, server: localhost, request: "GET /rcsapi/job/addtask HTTP/1.1", host: "127.0.0.1"
-2015/10/27 23:08:52 [error] 42064#0: *3 failed to load external Lua file "/usr/local/openresty/nginx/lua/job_addtask.lua": cannot open /usr/local/openresty/nginx/lua/job_addtask.lua: No such file or directory, client: 127.0.0.1, server: localhost, request: "GET /rcsapi/job/addtask HTTP/1.1", host: "localhost"
-2015/10/27 23:08:56 [error] 42064#0: *4 failed to load external Lua file "/usr/local/openresty/nginx/lua/job_addtask.lua": cannot open /usr/local/openresty/nginx/lua/job_addtask.lua: No such file or directory, client: 127.0.0.1, server: localhost, request: "GET /rcsapi/job/addtask HTTP/1.1", host: "127.0.0.1"
-2015/10/27 23:10:21 [alert] 42096#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:10:21 [notice] 42096#0: signal process started
-2015/10/27 23:10:21 [alert] 42038#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:12:18 [alert] 42126#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:12:18 [notice] 42126#0: signal process started
-2015/10/27 23:12:18 [alert] 42038#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/10/27 23:12:54 [error] 42127#0: *8 open() "/usr/local/openresty/nginx/html/trackapi/config" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /trackapi/config HTTP/1.1", host: "127.0.0.1"
+2015/10/28 19:53:26 [alert] 4113#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/28 19:53:26 [notice] 4113#0: signal process started
+2015/10/28 19:53:26 [alert] 4058#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/28 19:53:32 [error] 4114#0: *2 failed to load external Lua file "/usr/local/openresty/nginx/conf/lua/rcsapi/job_addtask.lua": cannot open /usr/local/openresty/nginx/conf/lua/rcsapi/job_addtask.lua: No such file or directory, client: 127.0.0.1, server: localhost, request: "GET /rcsapi/job/addtask HTTP/1.1", host: "127.0.0.1"
+2015/10/28 19:54:02 [alert] 4124#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/28 19:54:02 [notice] 4124#0: signal process started
+2015/10/28 19:54:02 [alert] 4058#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/28 19:54:03 [error] 4125#0: *3 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/rcsapi/job_addtask.lua:5: module 'common.redis_iresty' not found:
+	no field package.preload['common.redis_iresty']
+	no file 'lua/common/redis_iresty.lua'
+	no file '/blah/common/redis_iresty.lua'
+	no file '/usr/local/openresty/lualib/common/redis_iresty.lua'
+	no file '/usr/local/openresty/lualib/common/redis_iresty/init.lua'
+	no file './common/redis_iresty.lua'
+	no file '/usr/local/openresty/luajit/share/luajit-2.1.0-alpha/common/redis_iresty.lua'
+	no file '/usr/local/share/lua/5.1/common/redis_iresty.lua'
+	no file '/usr/local/share/lua/5.1/common/redis_iresty/init.lua'
+	no file '/usr/local/openresty/luajit/share/lua/5.1/common/redis_iresty.lua'
+	no file '/usr/local/openresty/luajit/share/lua/5.1/common/redis_iresty/init.lua'
+	no file '/usr/local/openresty/lualib/common/redis_iresty.so'
+	no file './common/redis_iresty.so'
+	no file '/usr/local/lib/lua/5.1/common/redis_iresty.so'
+	no file '/usr/local/openresty/luajit/lib/lua/5.1/common/redis_iresty.so'
+	no file '/usr/local/lib/lua/5.1/loadall.so'
+	no file '/usr/local/openresty/lualib/common.so'
+	no file './common.so'
+	no file '/usr/local/lib/lua/5.1/common.so'
+	no file '/usr/local/openresty/luajit/lib/lua/5.1/common.so'
+	no file '/usr/local/lib/lua/5.1/loadall.so'
+stack traceback:
+coroutine 0:
+	[C]: in function 'require'
+	/usr/local/openresty/nginx/lua/rcsapi/job_addtask.lua:5: in function </usr/local/openresty/nginx/lua/rcsapi/job_addtask.lua:1>, client: 127.0.0.1, server: localhost, request: "GET /rcsapi/job/addtask HTTP/1.1", host: "127.0.0.1"
+2015/10/28 19:56:10 [alert] 4159#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/28 19:56:10 [notice] 4159#0: signal process started
+2015/10/28 19:56:10 [alert] 4058#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/28 19:56:55 [error] 4160#0: *8 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:19: Expected colon but found invalid token at character 9
+stack traceback:
+coroutine 0:
+	[C]: in function 'decode'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:19: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "GET /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/28 20:09:47 [error] 4160#0: *12 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:19: attempt to call local 'json_decode' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "GET /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/28 23:18:17 [error] 4160#0: *18 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:22: bad argument #2 to 'say' (non-array table found)
+stack traceback:
+coroutine 0:
+	[C]: in function 'say'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:22: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "GET /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/28 23:18:27 [error] 4160#0: *20 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:22: bad argument #2 to 'say' (non-array table found)
+stack traceback:
+coroutine 0:
+	[C]: in function 'say'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:22: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "GET /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:05:45 [error] 4160#0: *31 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: bad argument #1 to 'pairs' (table expected, got string)
+stack traceback:
+coroutine 0:
+	[C]: in function 'pairs'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:07:41 [error] 4160#0: *34 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: bad argument #1 to 'pairs' (table expected, got nil)
+stack traceback:
+coroutine 0:
+	[C]: in function 'pairs'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:08:48 [error] 4160#0: *35 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: bad argument #1 to 'pairs' (table expected, got string)
+stack traceback:
+coroutine 0:
+	[C]: in function 'pairs'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:10:31 [error] 4160#0: *38 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: bad argument #1 to 'pairs' (table expected, got nil)
+stack traceback:
+coroutine 0:
+	[C]: in function 'pairs'
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua:33: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:23:12 [error] 4160#0: *47 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:32: '=' expected near 'change', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:27:51 [error] 4160#0: *48 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:32: attempt to index global 'gx' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:28:40 [alert] 9215#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/29 01:28:40 [notice] 9215#0: signal process started
+2015/10/29 01:28:40 [alert] 4058#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/29 01:28:43 [error] 9216#0: *49 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:32: attempt to index global 'gx' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:29:06 [alert] 9227#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/29 01:29:10 [error] 9229#0: *1 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:32: attempt to index global 'gx' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:34:58 [error] 9229#0: *4 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:45: attempt to index field 'ngx' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:50:20 [error] 9229#0: *9 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:41: attempt to call global 'test' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:57:29 [error] 9229#0: *11 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: 'then' expected near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:58:35 [error] 9229#0: *12 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: 'then' expected near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:59:21 [error] 9229#0: *13 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: 'then' expected near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 01:59:33 [alert] 9719#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/29 01:59:35 [error] 9721#0: *1 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: 'then' expected near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 02:00:34 [error] 9721#0: *2 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: unexpected symbol near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 02:01:00 [error] 9721#0: *3 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:63: 'then' expected near 'else', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 02:01:23 [error] 9721#0: *4 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:61: unexpected symbol near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 02:01:38 [error] 9721#0: *5 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:63: unexpected symbol near ':', client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/10/29 02:20:18 [alert] 10059#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/29 02:20:18 [notice] 10059#0: signal process started
+2015/10/29 02:20:18 [alert] 9720#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/10/29 02:30:44 [error] 10060#0: *17 lua entry thread aborted: runtime error: /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:43: attempt to call method 'nget' (a nil value)
+stack traceback:
+coroutine 0:
+	/usr/local/openresty/nginx/lua/trackapi/config_addip.lua: in function </usr/local/openresty/nginx/lua/trackapi/config_addip.lua:1>, client: 127.0.0.1, server: localhost, request: "POST /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"

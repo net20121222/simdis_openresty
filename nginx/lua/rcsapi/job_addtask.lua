@@ -2,7 +2,20 @@
 -- @Author  : miaolian (mike19890421@163.com)
 -- @Version : 1.0
 
-local redis = require "common.redis_iresty"
+-- get task info
+
+-- data:md5str
+-- data:sopcmd
+-- data:surl
+-- data:storepath
+-- data:servers
+-- data:filesize
+-- data:server_type
+-- data:itemid
+-- data:ipinfo
+
+-- 
+local redis = require "common.simdis_redis"
 
 local red = redis:new()
 local ok, err = red:set("cat", "an ssss")
