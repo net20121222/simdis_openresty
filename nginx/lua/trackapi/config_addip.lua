@@ -23,7 +23,7 @@ local function print_jsontable(value)
     end
 end
 
-local tab_json = data:get_table_jsondata()
+--local tab_json = data:get_table_jsondata()
 --[[
 ngx.say(string_json)
 if tab_json then
@@ -33,17 +33,13 @@ else
 end
 ]]--
 
-local x = json:json_encode(tab_json)
-local ok, err = red:sadd("test", x)
+--local x = json:json_encode(tab_json)
+local test11 = {a,123,b,456}
+local ok, err = red:rpush("test", test11)
 if not ok then
-    ngx.say("failed to set dog: ", err)
+    ngx.say("failed to set test: ", err)
     return
 end
 ngx.say("set result: ", ok)
-local ok, err = red:smembers ("test")
-if not ok then
-    ngx.say("failed to set dog: ", err)
-    return
-end
-ngx.say("get result: ", ok)
+
 

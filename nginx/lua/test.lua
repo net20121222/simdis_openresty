@@ -14,4 +14,11 @@ local function test(value)
 		end
     end
 end
-test(ab)
+local a = {asd="asdass"}
+local b = {}
+
+a["ip"] = b
+b["ss"] = 3
+b["ss"] = 4
+test(a)
+--test(ab)
