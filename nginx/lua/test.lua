@@ -14,11 +14,21 @@ local function test(value)
 		end
     end
 end
-local a = {asd="asdass"}
-local b = {}
 
-a["ip"] = b
-b["ss"] = 3
-b["ss"] = 4
-test(a)
---test(ab)
+local function is_number(n, ...)
+    local arg = {...}
+    print("n:",n)
+    print(#arg)
+    local num
+    for _,v in ipairs(arg) do
+        num = tonumber(v)
+        if nil == num then
+            return false
+        end
+    end
+
+    return true
+end
+
+local a = {}
+print(next(a))

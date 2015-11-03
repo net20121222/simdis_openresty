@@ -10,18 +10,6 @@ local red = redis:new()
 local data = datas:new()
 local json = cjson:new()
 
-local function print_jsontable(value)
-	if type(value) ~= "table" then
-		return
-	end
-	for k,v in pairs(value) do
-		if "table" == type(v) then
-    		print_jsontable(v)	
-		else
-			ngx.say(k,":",v)
-		end
-    end
-end
 
 --local tab_json = data:get_table_jsondata()
 --[[
@@ -32,10 +20,11 @@ else
 	ngx.say("nil")
 end
 ]]--
-
+--local tab_json = {asd="test",{1,2,3}}
+--data:print_jsontable(tab_json)
 --local x = json:json_encode(tab_json)
-local test11 = {a,123,b,456}
-local ok, err = red:rpush("test", test11)
+local test11 = {"a","b","c","d","e","f","g"}
+local ok, err = red:rpush("test", unpack(test11))
 if not ok then
     ngx.say("failed to set test: ", err)
     return

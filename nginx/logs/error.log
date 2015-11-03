@@ -1,0 +1,4 @@
+2015/11/02 18:54:28 [alert] 3234#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/11/03 02:13:40 [alert] 10126#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/11/03 02:13:40 [notice] 10126#0: signal process started
+2015/11/03 02:13:40 [alert] 3235#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22

@@ -12,7 +12,8 @@ local data = datas:new()
 local json = cjson:new()
 
 
-local function dealhandle()
+local 
+function dealhandle()
 	-- basic task info(md5,url,opcmd,storepath,servers,filesize,servertype,itemid)
 	local basicTaskInfo = {} 
 	-- post json date
@@ -55,18 +56,40 @@ local function dealhandle()
 		local tab_taskinfo = tab_json["sim_taskinfo"]
 
 		for _,taskipinfo in pairs(tab_taskinfo) do
-			-- get work task info
-			local jsonstrinfo = get_addtaskinfo(taskipinfo["sim_taskid"],basicTaskInfo,taskMD5)
+			repeat
+				local sim_ip_checkresult = data:is_number(taskipinfo["sim_taskid"])
+				local sim_id_checkresult = data:is_ip(taskipinfo["sim_peerip"])
+				if not sim_ip_checkresult and not sim_ip_checkresult then
+					local tab_err = basicTaskInfo
+					tab_err["sim_peerip"] = taskipinfo["sim_peerip"]
+					tab_err["sim_taskid"] = taskipinfo["sim_taskid"]
+					data:say_err(tab_err,"check error")
+					break
+				end
+				-- get work task info
+				local jsonstrinfo = get_addtaskinfo(taskipinfo["sim_taskid"],basicTaskInfo,taskMD5)
+				-- get add ip task info
+				local iptaskkey = "sim_peerip:"..taskipinfo["sim_peerip"]..",sim_servertype:"..basicTaskInfo["sim_servertype"]
+				local str_iptask,str_wait = get_addiptaskinfo(iptaskkey,taskipinfo["sim_taskid"],taskMD5)
+				--if str_iptask == nil or str_wait == nil or jsonstrinfo == nil then
+				if jsonstrinfo == nil then
+					local tab_err = basicTaskInfo
+					tab_err["sim_peerip"] = taskipinfo["sim_peerip"]
+					tab_err["sim_taskid"] = taskipinfo["sim_taskid"]
+					data:say_err(tab_err,"get error")
+					break
+				end
 
-			-- get add ip task info
-			local iptaskkey = "sim_peerip:"..taskipinfo["sim_peerip"]..",sim_servertype:"..basicTaskInfo["sim_servertype"]
-			local str_iptask,str_wait = get_addiptaskinfo(iptaskkey,taskipinfo["sim_taskid"],taskMD5)
-			if str_iptask == nil or str_wait == nil then
-				return -1
-			end
-
-			set_addtaskinfo(taskMD5,jsonstrinfo)
-			set_addiptaskinfo(iptaskkey,str_iptask,str_wait)
+				local set_taskresult = set_addtaskinfo(taskMD5,jsonstrinfo)
+				local set_iptaskresult = set_addiptaskinfo(iptaskkey,str_iptask,str_wait)
+				if not set_taskresult and not set_taskresult then
+					local tab_err = basicTaskInfo
+					tab_err["sim_peerip"] = taskipinfo["sim_peerip"]
+					tab_err["sim_taskid"] = taskipinfo["sim_taskid"]
+					data:say_err(tab_err,"set error")
+					break
+				end
+			until true
 		end
 	end
 end
@@ -74,19 +97,20 @@ end
 
 function set_addtaskinfo(taskMD5,jsonstrinfo)
 	if jsonstrinfo == nil or taskMD5 == nil then 
-		return 0
+		return false
 	end
 	local ok, err = red:hset("taskinfo",taskMD5,jsonstrinfo)
 	if not ok then
     	ngx.say("failed to set taskinfo: ", err)
-    	return -1
+    	return false
 	end
+	return true
 end
 
 
 function set_addiptaskinfo(iptaskkey,str_iptask,str_wait)
 	if iptaskkey == nil or str_iptask == nil or str_wait == nil then 
-		return 0
+		return false
 	end
 
 	local iptask_wait = iptaskkey..",sim_wait"
@@ -94,15 +118,15 @@ function set_addiptaskinfo(iptaskkey,str_iptask,str_wait)
 	local ok, err = red:hset(tostring(iptaskkey),str_wait,str_iptask)
 	if not ok then
 		ngx.say("failed to set iptaskkey: ", err)
-		return -1
+		return false
 	end
 
-	local ok, err = red:rpush(tostring(iptask_wait), str_wait)
+	local ok, err = red:lpush(tostring(iptask_wait), str_wait)
 	if not ok then
 		ngx.say("failed to set taskinfo: ", err)
-		return -1
+		return false
 	end
-	return 0
+	return true
 end
 
 
@@ -111,7 +135,7 @@ function get_addtaskinfo(sim_taskid,basicTaskInfo,taskMD5)
 	local taskkey = taskMD5
 	local taskinfo = basicTaskInfo
 	local result,err = red:hexists("taskinfo",taskkey)
-	local jsonstrinfo = nil
+	local jsonstrinfo
 	-- task is not set 
 	if result == 0 then
 		local tab_taskid = {}
@@ -170,18 +194,5 @@ function get_addiptaskinfo(iptaskkey,iptaskfield,taskMD5)
 	return str_iptask,str_wait
 end
 
---[[
-function print_jsontable(value)
-	if type(value) ~= "table" then
-		return
-	end
-	for k,v in pairs(value) do
-		if "table" == type(v) then
-    		print_jsontable(v)	
-		else
-			ngx.say(k,":",v)
-		end
-    end
-end
-]]--
+
 dealhandle()
