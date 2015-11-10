@@ -7,14 +7,14 @@ local c_json = require "cjson"
 local _M = { _VERSION = '0.01' }
 local mt = { __index = _M }
 
-function _M:json_decode( str )
+function _M.json_decode( self,str )
     local json_value = nil
     pcall(function (str) json_value = c_json.decode(str) end, str)
     return json_value
 end
 
 
-function _M:json_encode( str, empty_table_as_object )
+function _M.json_encode(self, str, empty_table_as_object )
   --Lua的数据类型里面，array和dict是同一个东西。对应到json encode的时候，就会有不同的判断
   --对于linux，我们用的是cjson库：A Lua table with only positive integer keys of type number will be encoded as a JSON array. All other tables will be encoded as a JSON object.
   --cjson对于空的table，就会被处理为object，也就是{}
@@ -33,10 +33,8 @@ function _M:json_encode( str, empty_table_as_object )
 end
 
 
-function _M:new()
-	local self = {}
-	setmetatable(self, mt)
-	return self
+function _M.new(self)
+	return setmetatable({}, mt)
 end
 
 return 	_M

@@ -1,7 +1,7 @@
 -- @Date    : 2015-10-28 20:30:26
 -- @Author  : miaolian (mike19890421@163.com)
 -- @Version : 1.0
-
+local handle = require("common.simdiserr.errorinfo").handler
 local tbl = {"alpha","beta", "gamma"}
 local ab = {a=1,b="sssdfsd",c={c1=1,c2=2},d={10,11},100}
 
@@ -30,5 +30,5 @@ local function is_number(n, ...)
     return true
 end
 
-local a = {}
-print(next(a))
+
+test(handle("5678"))

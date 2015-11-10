@@ -23,12 +23,18 @@ end
 --local tab_json = {asd="test",{1,2,3}}
 --data:print_jsontable(tab_json)
 --local x = json:json_encode(tab_json)
+
+
+
+ngx.say("ok: ", 1)
+
 local test11 = {"a","b","c","d","e","f","g"}
-local ok, err = red:rpush("test", unpack(test11))
+local ok, err = red:hget("taskinfo","12a053d8ac439fb011fe1c61cbe1f732")
 if not ok then
     ngx.say("failed to set test: ", err)
     return
 end
-ngx.say("set result: ", ok)
-
+local b = {"12","sw"}
+local a["1"] = b
+ngx.say("ok: ", a)
 

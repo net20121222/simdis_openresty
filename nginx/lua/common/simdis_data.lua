@@ -12,7 +12,7 @@ local say = ngx.say
 local _M = { _VERSION = '0.01' }
 local mt = { __index = _M }
 
-function _M:get_table_jsondata()
+function _M.get_table_jsondata(self)
 	local str_body = strbody
 	if not str_body then
 		--ngx.say("failed to get post data:", err)
@@ -29,7 +29,7 @@ function _M:get_table_jsondata()
 end
 
 
-function _M:get_string_jsondata()
+function _M.get_string_jsondata(self)
 	local str_body = strbody
 	if not str_body then
 		--ngx.say("failed to get post data:", err)
@@ -40,7 +40,7 @@ function _M:get_string_jsondata()
 end
 
 
-function _M:print_jsontable(value)
+function _M.print_jsontable(self,value)
 	if type(value) ~= "table" then
 		return
 	end
@@ -54,8 +54,20 @@ function _M:print_jsontable(value)
 end
 
 
+function _M.get_tablelen(self,value)
+	if type(value) ~= "table" then
+		return 0
+	end
+	local count = 0
+	for _,v in pairs(value) do
+		count = count + 1
+    end
+    return count
+end
+
+
 -- 对输入参数逐个进行校验，只要有一个不是数字类型，则返回 false
-function _M:is_number(n, ...)
+function _M.is_number(self,n, ...)
     local arg = {...}
 
     local num
@@ -71,7 +83,7 @@ end
 
 
 -- 对输入参数逐个进行校验，只要有一个不是数字类型，则返回 false
-function _M:is_ip(n, ...)
+function _M.is_ip(self,n, ...)
     local arg = {...}
     --[[
     local num
@@ -86,17 +98,15 @@ function _M:is_ip(n, ...)
 end
 
 
-function _M:say_err(tab_info,str_code)
+function _M.say_err(self,tab_info,str_code)
 	tab_info["errdetail"] = str_code
 	local value = json:json_encode(tab_info)
 	say(value)
 end
 
 
-function _M:new()
-	local self = {}
-	setmetatable(self, mt)
-	return self
+function _M.new(self)
+	return setmetatable({}, mt)
 end
 
 return 	_M

@@ -1,4 +1,2 @@
-2015/11/02 18:54:28 [alert] 3234#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/11/03 02:13:40 [alert] 10126#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
-2015/11/03 02:13:40 [notice] 10126#0: signal process started
-2015/11/03 02:13:40 [alert] 3235#0: lua_code_cache is off; this will hurt performance in /usr/local/openresty/nginx/conf/nginx.conf:22
+2015/11/10 00:33:13 [error] 3184#0: *213 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: ')' expected near '}', client: 127.0.0.1, server: localhost, request: "GET /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
+2015/11/10 01:20:09 [error] 3184#0: *214 failed to load external Lua file "/usr/local/openresty/nginx/lua/trackapi/config_addip.lua": /usr/local/openresty/nginx/lua/trackapi/config_addip.lua:30: ')' expected near '}', client: 127.0.0.1, server: localhost, request: "GET /trackapi/config/addip HTTP/1.1", host: "127.0.0.1"
