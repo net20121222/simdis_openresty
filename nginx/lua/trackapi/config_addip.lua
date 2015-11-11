@@ -10,7 +10,8 @@ local red = redis:new()
 local data = datas:new()
 local json = cjson:new()
 
-
+local ERRORINFO	= require('common.simdiserr.errorinfo').info
+local errorhandle = require("common.simdiserr.errorhandle")
 --local tab_json = data:get_table_jsondata()
 --[[
 ngx.say(string_json)
@@ -24,17 +25,17 @@ end
 --data:print_jsontable(tab_json)
 --local x = json:json_encode(tab_json)
 
+local testjson = [[{"task_detailinfo":[{"url":"test_url","ipidinfo":[{"ip":"testip","id":"testid"}]}]}]]
 
-
-ngx.say("ok: ", 1)
-
+local x = json:json_decode(testjson)
+data:print_jsontable(x)
+--[[
 local test11 = {"a","b","c","d","e","f","g"}
 local ok, err = red:hget("taskinfo","12a053d8ac439fb011fe1c61cbe1f732")
 if not ok then
     ngx.say("failed to set test: ", err)
     return
 end
-local b = {"12","sw"}
-local a["1"] = b
-ngx.say("ok: ", a)
+]]--
+
 

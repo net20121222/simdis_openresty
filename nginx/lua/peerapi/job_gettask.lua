@@ -135,7 +135,6 @@ function dealhandle()
 		return 
 	end
 	
-
 	if 0 == tonumber(tab_args["gettype"]) then
 		str_taskidinfo = get_taskdeal() 
 	elseif 1 ==  tonumber(tab_args["gettype"]) then
