@@ -1,7 +1,7 @@
 -- @Date    : 2015-10-27 23:00:34
 -- @Author  : miaolian (mike19890421@163.com)
 -- @Version : 1.0
--- example	: curl -l -H "Content-type: application/json" -X POST -d '{"sim_md5":1,"sim_url":"ssasasas","sim_opcmd":"asd","sim_storepath":"123","sim_server":"sd","sim_filesize":123,"sim_servertype":"asd","sim_itemid":12,"sim_taskinfo":[{"sim_peerip":123123,"sim_taskid":123},{"sim_peerip":12312223222,"sim_taskid":123333}]}' '127.0.0.1/rcsapi/job/addtask'
+-- example	: curl -l -H "Content-type: application/json" -X POST -d '{"task_detailinfo":[{"sim_md5":1,"sim_url":"www.baidu.com/checknull?a=4&b=4","sim_opcmd":"asd","sim_storepath":"123","sim_server":"sd","sim_filesize":123,"sim_servertype":"asd","sim_itemid":12,"sim_ipidinfo":[{"sim_peerip":123123,"sim_taskid":123},{"sim_peerip":123123,"sim_taskid":63333},{"sim_peerip":12312223222,"sim_taskid":1233333}]}]}' '127.0.0.1/rcsapi/job/addtask'
 
 local redis = require "common.simdis_redis"
 local datas = require "common.simdis_data"
