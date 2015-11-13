@@ -25,17 +25,17 @@ end
 --data:print_jsontable(tab_json)
 --local x = json:json_encode(tab_json)
 
-local testjson = [[{"task_detailinfo":[{"url":"test_url","ipidinfo":[{"ip":"testip","id":"testid"}]}]}]]
+--local testjson = [[{"task_detailinfo":[{"url":"test_url","ipidinfo":[{"ip":"testip","id":"testid"}]}]}]]
 
-local x = json:json_decode(testjson)
-data:print_jsontable(x)
---[[
+--local x = json:json_decode(testjson)
+--data:print_jsontable(x)
+
 local test11 = {"a","b","c","d","e","f","g"}
-local ok, err = red:hget("taskinfo","12a053d8ac439fb011fe1c61cbe1f732")
+local ok, err = red:hget("test","12a053d8ac439fb011fe1c61cbe1f732")
 if not ok then
     ngx.say("failed to set test: ", err)
     return
 end
-]]--
+ngx.say(ok)
 
 

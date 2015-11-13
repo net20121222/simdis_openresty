@@ -1,7 +1,9 @@
 -- @Date    : 2015-10-27 23:00:34
 -- @Author  : miaolian (mike19890421@163.com)
 -- @Version : 1.0
--- example	: curl -l -H "Content-type: application/json" -X POST -d '{"task_detailinfo":[{"sim_md5":1,"sim_url":"www.baidu.com/checknull?a=4&b=4","sim_opcmd":"asd","sim_storepath":"123","sim_server":"sd","sim_filesize":123,"sim_servertype":"asd","sim_itemid":12,"sim_ipidinfo":[{"sim_peerip":123123,"sim_taskid":123},{"sim_peerip":123123,"sim_taskid":63333},{"sim_peerip":12312223222,"sim_taskid":1233333}]}]}' '127.0.0.1/rcsapi/job/addtask'
+-- example	: 
+--			curl -l -H "Content-type: application/json" -X POST -d '{"task_detailinfo":[{"sim_md5":1,"sim_url":"www.baidu.com/checknull?a=4&b=4","sim_opcmd":"asd","sim_storepath":"123","sim_server":"sd","sim_filesize":123,"sim_servertype":"asd","sim_itemid":12,"sim_ipidinfo":[{"sim_peerip":123123,"sim_taskid":123},{"sim_peerip":123123,"sim_taskid":15},{"sim_peerip":12312223222,"sim_taskid":123}]},{"sim_md5":2312311,"sim_url":"www.baidu.com/ch333ecknull?a=4&b=4","sim_opcmd":"asd","sim_storepath":"123","sim_server":2,"sim_filesize":123,"sim_servertype":"asd","sim_itemid":12,"sim_ipidinfo":[{"sim_peerip":141414,"sim_taskid":123},{"sim_peerip":151515,"sim_taskid":15},{"sim_peerip":161616,"sim_taskid":1233333}]}]}' '127.0.0.1/rcsapi/job/addtask'
+--			{"errcode":200,"errinfo":"success "}
 
 local redis = require "common.simdis_redis"
 local datas = require "common.simdis_data"
@@ -14,6 +16,7 @@ local json = cjson:new()
 local ERRORINFO	= require('common.simdiserr.errorinfo').info
 local errorhandle = require("common.simdiserr.errorhandle")
 
+-- redis eval add work basic info
 local eval_info = [[
 	local result = redis.call('hexists',"taskinfo",KEYS[1])
 	if tonumber(result) == 0 then
@@ -29,6 +32,9 @@ local eval_info = [[
 ]]
 
 
+-- check add task work info(url,md5,opcmd,filezise,itemid,server,servertype,storepat)
+-- @param work detail basic info(url,md5,opcmd,filezise,itemid,server,servertype,storepat)
+-- @return nil,detail error info/0,nil
 function check_api(basicTaskInfo)
 	--check post task basic info
 	if not basicTaskInfo.sim_md5 or basicTaskInfo.sim_md5 == ngx.null then 
@@ -59,8 +65,12 @@ function check_api(basicTaskInfo)
 end
 
 
+-- add task work in content_by_lua
+-- @param nil
+-- @return nil
 local 
 function dealhandle()
+	local succees_flag = false
 	-- post json date
 	local tab_json = data:get_table_jsondata()
 	if not tab_json or not tab_json.task_detailinfo then
@@ -97,6 +107,7 @@ function dealhandle()
 			-- check basic info
 			local check_result,check_status = check_api(basicTaskInfo)
 			if not check_result then
+				succees_flag = true
 				local info = ERRORINFO.RCS_ERROR
 				local desc = check_status
 				local response = errorhandle.sim_resp(info, desc)
@@ -106,6 +117,7 @@ function dealhandle()
 			end
 
 			if not taskinfo_values["sim_ipidinfo"] or taskinfo_values["sim_ipidinfo"] == ngx.null then
+				succees_flag = true
 				local info = ERRORINFO.RCS_ERROR
 				local desc = "no task real work ip or id"
 				local response = errorhandle.sim_resp(info, desc)
@@ -118,6 +130,7 @@ function dealhandle()
 			local tab_taskinfo = taskinfo_values["sim_ipidinfo"]
 			local error_ipid = add_taskinfo(taskmd5,tab_taskinfo,basicTaskInfo)
 			if next(error_ipid) ~= nil then
+				succees_flag = true
 				local info = ERRORINFO.RCS_ERROR
 				local desc = "insert peerip and taskid error"
 				basicTaskInfo["sim_ipidinfo"] = error_ipid
@@ -128,9 +141,18 @@ function dealhandle()
 			end
 		until true
 	end
+	if not succees_flag then
+		local response = errorhandle.sim_resp(ERRORINFO.SUCCESS)
+		ngx.say(response)
+	end
 end
 
 
+-- add work detail info,ip detail work info,add wait list
+-- @param work md5(workmd5+url+opcmd)
+-- @param work ip and id
+-- @param work detail info(url,md5,opcmd,filezise,itemid,server,servertype,storepath)
+-- @return handle wrong ip and id
 function add_taskinfo(taskmd5,tab_taskinfo,basicTaskInfo)
 	local task_info = tab_taskinfo
 	local err_ipid = {}
@@ -150,7 +172,6 @@ function add_taskinfo(taskmd5,tab_taskinfo,basicTaskInfo)
 				break
 			end
 
-
 			local iptask_key = "sim_peerip:"..ipidvalues["sim_peerip"]..",sim_servertype:"..basicTaskInfo["sim_servertype"]
 			local status_detail = add_taskdetail(iptask_key,taskmd5,ipidvalues["sim_taskid"])
 			if not status_detail then
@@ -163,6 +184,11 @@ function add_taskinfo(taskmd5,tab_taskinfo,basicTaskInfo)
 end
 
 
+-- add work detail info 
+-- @param work md5(workmd5+url+opcmd)
+-- @param work detail info(url,md5,opcmd,filezise,itemid,server,servertype,storepath)
+-- @param work taskid
+-- @return true:set work detail info succeed/false:set work detail info failed
 function add_md5task(taskmd5,basicTaskInfo,taskid)
 	local tab_info = {}
 	tab_info.sim_md5 = basicTaskInfo.sim_md5
@@ -179,15 +205,22 @@ function add_md5task(taskmd5,basicTaskInfo,taskid)
 	local str_basicinfo = json:json_encode(tab_info)
 	local status, errinfo = red:eval(eval_info,3,taskmd5,str_basicinfo,taskid)
 	if not status then
-		ngx.say("failed to add_md5task: ", errinfo)
+		local info = ERRORINFO.REDIS_ERROR
+		local desc = errinfo
+		errorhandle.sim_log(info, desc)
 		return false
 	end
 	return true
 end
 
 
+-- add ip detail work info
+-- @param ip info hashkey(ip+servertype)
+-- @param work md5(workmd5+url+opcmd)
+-- @param work taskid
+-- @return true:set work detail info and waitlist succeed/false:set work detail info and waitlist failed
 function add_taskdetail(iptaskkey,taskmd5,taskid)
-	local iptaskwait = iptaskkey..",wait"
+	local iptaskwait = iptaskkey..",sim_wait"
 	local iptask_value = {}
 	iptask_value["sim_taskmd5"] = taskmd5
 	iptask_value["sim_numdeal"] = 0
@@ -222,7 +255,9 @@ function add_taskdetail(iptaskkey,taskmd5,taskid)
 	end
 	local ok, err = red:hset(tostring(iptaskkey),taskid,iptask_strvalue)
 	if not ok then
-		ngx.say("failed to add_taskdetail: ", err)
+		local info = ERRORINFO.REDIS_ERROR
+		local desc = "add task info failed"
+		errorhandle.sim_log(info, desc)
 		return false
 	end
 	local status = add_taskwait(iptaskwait,taskid)
@@ -233,10 +268,16 @@ function add_taskdetail(iptaskkey,taskmd5,taskid)
 end
 
 
+-- add task wait list
+-- @param ip info hashkey(ip+servertype+",sim_wait")
+-- @param work taskid
+-- @return true:add task list succeed/false:add task list failed
 function add_taskwait(iptaskkey,taskid)
 	local ok, err = red:lpush(tostring(iptaskkey), taskid)
 	if not ok then
-		ngx.say("failed to add_taskwait: ", err)
+		local info = ERRORINFO.REDIS_ERROR
+		local desc = "add task wait info failed"
+		errorhandle.sim_log(info, desc)
 		return false
 	end
 	return true

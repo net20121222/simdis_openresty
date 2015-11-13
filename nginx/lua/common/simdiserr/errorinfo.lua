@@ -11,11 +11,12 @@ _M.info = {
     --	SUCCESS
     ["SUCCESS"]			= { 200,   'success '},
     
-    --	System Level ERROR
+    --	3th part Level ERROR
     ['REDIS_ERROR']		= { 30101, 'redis error for '},
     
-    --	System Level ERROR
+    --	API Level ERROR
     ['RCS_ERROR']		= { 40101, 'rcs error for '},
+    ['PEER_ERROR']       = { 40201, 'peer error for '},
 
     --  unknown error
     ['UNKNOWN_ERROR']		= { 50501, 'unknown reason '},
