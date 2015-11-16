@@ -29,8 +29,8 @@ function _M.sim_log(info, desc, data, errstack)
     local errcode = code
     local errinfo = desc and err..desc or err 
     
-    errlog = errlog .. ' errcode : '..errcode
-    errlog = errlog .. ', errinfo : '..errinfo
+    errlog = errlog .. ' rcode : '..errcode
+    errlog = errlog .. ', rinfo : '..errinfo
     if data then
         errlog = errlog .. ', extrainfo : '..data
     end
@@ -45,8 +45,8 @@ function _M.sim_resp(info, desc, data)
     
     local code = info[1]
     local err  = info[2]
-    response.errcode = code
-    response.errinfo = desc and err..desc or err 
+    response.rcode = code
+    response.rinfo = desc and err..desc or err 
     if data then 
         response.data = data 
     end

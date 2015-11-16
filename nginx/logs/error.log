@@ -1,1 +1,0 @@
-2015/11/13 02:03:16 [error] 2933#0: *209 [lua] errorhandle.lua:40: sim_log():  errcode : 40101, errinfo : rcs error for , client: 127.0.0.1, server: localhost, request: "GET /peerapi/job/gettask?cpunum=12&pid=3&leftnum=100&servertype=asd&peerip=123123&gettype=1 HTTP/1.1", host: "127.0.0.1"

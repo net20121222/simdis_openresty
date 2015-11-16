@@ -1,7 +1,9 @@
 -- @Date    : 2015-10-28 20:30:26
 -- @Author  : miaolian (mike19890421@163.com)
 -- @Version : 1.0
-local handle = require("common.simdiserr.errorhandle").handler
+
+--local cjson = require "common.simdis_json"
+--local data = datas:new()
 
 local tbl = {"alpha","beta", "gamma"}
 local ab = {a=1,b="sssdfsd",c={c1=1,c2=2},d={10,11},100}
@@ -31,5 +33,6 @@ local function is_number(n, ...)
     return true
 end
 
-
-test(handle("5678"))
+local a = nil
+a = a or 2
+print(a)

@@ -15,13 +15,13 @@ local mt = { __index = _M }
 function _M.get_table_jsondata(self)
 	local str_body = strbody
 	if not str_body then
-		--ngx.say("failed to get post data:", err)
+		--ngx.say("failed to get post data:")
 		return nil
 	end
 
 	local value, err = json:json_decode(str_body)
 	if not value then
-	    --ngx.say("body is post data")
+	    --ngx.say("body is post data:",err)
 	    return nil
 	else
 	    return value
